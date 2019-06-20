@@ -5,7 +5,7 @@ void	ft_putchar(char c)
 
 void ft_putstr(char *c)
 {
-	while (c)
+	while (*c != '\0')
 		write(1, c++, 1);
 }
 
@@ -16,8 +16,11 @@ int main (int ac, char **av)
 	i = 0;
 	
 	if (ac !=2)
+	{
 		write(1, '\n', 1);
-	while (av[1][i] != NULL)
+		return (0);
+	}
+	while (av[1][i] != '\0')
 		{
 		if (av[1][i] <= 90 && av[1][i] >= 65)
 			av[1][i] = av[1][i] + 32;
