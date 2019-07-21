@@ -2,44 +2,48 @@
 
 void	ft_putchar(char c);
 
-int		ft_isspace(char c)
+void		*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	if (c == ' ' || c == '\f' || c == '\n' || c == '\r' || c == '\t' || c == '\v')
-		return (1);
-	else
-		return (0);
-}
-
-
-int		ft_atoi(char *str)
-{
-	int		i;
-	int		neg;
-	long	nb;
+	size_t i;
 
 	i = 0;
-	neg = 1;
-	nb = 0;
-	while (ft_isspace(str[i]) != 0)
+	while (i < n)
 	{
+		((char *)dst)[i] = ((char *)src)[i];
 		i++;
 	}
-	while (str[i] == '+' || str[i] == '-')
+	return (dst);
+}
+
+void		ft_bzero(void *s, size_t n)
+{
+	size_t i;
+
+	i = 0;
+	while (i < n)
+		((char *)s)[i++] = '\0';
+}
+
+void		*ft_realloc(void *old, int oldsize, int newsize)
+{
+	void *nex;
+
+	nex = (void *)malloc(newsize);
+	if (nex == NULL)
 	{
-		if (str[i] == '-')
-			neg *= -1;
-		i++;
+		return (NULL);
 	}
-	while (str[i] >= '0' && str[i] <= '9')
+	if (old != NULL)
 	{
-		nb = (nb * 10) + (str[i] % 48);
-		i++;
+		ft_bzero(nex, newsize);
+		ft_memcpy(nex, old, (size_t)oldsize);
+		free(old);
 	}
-	nb *= neg;
-	return ((int)nb);
+	return (nex);
 }
 
 int main(void)
 {
 	printf("%d\n", ft_atoi("+++œ153a00"));
+	printf("%d\n", atoi("kdknf"));
 }
